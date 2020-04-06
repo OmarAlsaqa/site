@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}"/>
+</head>
+
+<body>
+<div class="navbar">
+    <a href="{% url 'home' %}" class="navbar-brand">Home</a>
+    <a href="{% url 'log' %}" class="navbar-item">Log Message</a>
+    <a href="{% url 'about' %}" class="navbar-item">About</a>
+    <a href="{% url 'contact' %}" class="navbar-item">Contact</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'account' %}" class="navbar-item">Account</a>
+        <a href="{% url 'logout' %}" class="navbar-item">Logout</a>
+    {% else %}
+        <a href="{% url 'register' %}" class="navbar-item">Register</a>    
+        <a href="{% url 'login' %}" class="navbar-item">Login</a>
+    {% endif %}
+</div>
+{% include "hello/messaging.html" %}
+<div class="container">
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+        <hr/>
+        <footer>
+            <p>© 2020</p>
+        </footer>
+    </div>
+</div>
+</body>
+
+</html>
